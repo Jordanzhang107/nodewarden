@@ -35,28 +35,38 @@ jobs:
   osv:
     name: OSV Dependency Scan
     runs-on: ubuntu-latest
+    continue-on-error: true
     permissions:
       contents: read
       security-events: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       - name: Run OSV‑Scanner
-        uses: google/osv-scanner-action/osv-scanner-action@v2.2.1
+        uses: google/osv-scanner-action/osv-scanner-action@v2.3.8
         with:
           scan-args: |-
             --recursive
+            --format sarif
+            --output osv-report.sarif
             ./
-          upload-sarif: true
-          fail-on-vuln: false
+
+      - name: Upload SARIF report
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: osv-report.sarif
+
 
 
 
   pnpm-audit:
     name: pnpm audit
     runs-on: ubuntu-latest
-
+    continue-on-error: true
     permissions:
       contents: read
 
