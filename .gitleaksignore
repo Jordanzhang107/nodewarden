@@ -1,0 +1,6 @@
+# gitleaks ignore file
+# The demo SSH key in webapp/src/lib/demo.ts is intentionally fake placeholder data
+# (notes: 'Fake SSH key material for UI preview.'). It is NOT a real secret.
+# gitleaks' private-key rule matches on the BEGIN...PRIVATE KEY header and cannot
+# distinguish placeholder demo data from real keys, hence the false positive.
+70dc9a76a901145dadbc6d86aed073fd7863c22f:webapp/src/lib/demo.ts:private-key:378

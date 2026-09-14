@@ -1,0 +1,9 @@
+# zizmor configuration
+# These permissions are intentionally broad because the workflows genuinely need them:
+#   - sync-global-domains.yml: creates PRs via peter-evans/create-pull-request
+#     (needs contents:write + pull-requests:write to push the branch and open the PR)
+rules:
+  excessive-permissions:
+    ignore:
+      - sync-global-domains.yml
+      - codeql.yml
