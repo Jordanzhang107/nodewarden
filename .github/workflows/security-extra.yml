@@ -33,9 +33,9 @@ jobs:
           # GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
   osv:
+    continue-on-error: true
     name: OSV Dependency Scan
     runs-on: ubuntu-latest
-    continue-on-error: true
     permissions:
       contents: read
       security-events: write
